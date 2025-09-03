@@ -264,4 +264,17 @@ class VectorStore:
             return None
         except Exception as e:
             print(f"Error getting lesson link: {e}")
+            return None
+
+    def get_course_metadata_by_title(self, course_title: str) -> Optional[Dict[str, Any]]:
+        """Get complete metadata for a specific course by title"""
+        try:
+            # Get course by ID (title is the ID)
+            results = self.course_catalog.get(ids=[course_title])
+            if results and 'metadatas' in results and results['metadatas']:
+                return results['metadatas'][0]
+            return None
+        except Exception as e:
+            print(f"Error getting course metadata: {e}")
+            return None
     
